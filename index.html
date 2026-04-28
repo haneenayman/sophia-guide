@@ -1,1 +1,2231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sophia's Weekly Home Guide — v6</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ COLOR PALETTE — warm, African-inspired ============ */
+  :root {
+    --terracotta: #C8553D;
+    --terracotta-soft: #E89B7A;
+    --sunset: #F28F3B;
+    --honey: #F4C95D;
+    --cream: #FAF3E0;
+    --paper: #FFF8EC;
+    --deep-green: #2D5F4C;
+    --sage: #88A096;
+    --mud: #6B4423;
+    --ink: #2A2118;
+    --soft-ink: #5C4F44;
+    --lavender: #9B8AA8;
+    --sky: #5DA9C9;
+    --rose: #D67D7D;
+    --bg: #FFF8EC;
+    --shadow: rgba(107, 68, 35, 0.12);
+    --shadow-strong: rgba(107, 68, 35, 0.22);
+  }
 
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 32px 20px 80px;
+  }
+
+  /* ============ HEADER ============ */
+  .hero {
+    text-align: center;
+    padding: 28px 16px 20px;
+    border-bottom: 2px dashed var(--terracotta-soft);
+    margin-bottom: 36px;
+  }
+  .hero .greeting {
+    font-family: 'Fraunces', serif;
+    font-size: 14px;
+    color: var(--terracotta);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    color: var(--mud);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 14px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .hero .subtitle {
+    font-size: 16px;
+    color: var(--soft-ink);
+    max-width: 540px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+  .hero .version-tag {
+    display: inline-block;
+    margin-top: 14px;
+    padding: 4px 14px;
+    background: var(--honey);
+    color: var(--mud);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* ============ SECTION HEADINGS ============ */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin: 48px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(107, 68, 35, 0.15);
+  }
+  .section-head .num {
+    font-family: 'Fraunces', serif;
+    font-size: 38px;
+    color: var(--terracotta);
+    font-weight: 500;
+    line-height: 1;
+  }
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(22px, 4vw, 30px);
+    color: var(--mud);
+    font-weight: 600;
+    flex: 1;
+  }
+  .section-head .hint {
+    font-size: 13px;
+    color: var(--soft-ink);
+    font-style: italic;
+  }
+
+  /* ============ GENTLE REMINDERS (was "Important Rules") ============ */
+  .reminders {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .reminder-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px 22px;
+    box-shadow: 0 2px 8px var(--shadow);
+    border-left: 5px solid var(--honey);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    position: relative;
+  }
+  .reminder-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--shadow-strong);
+  }
+  .reminder-card .icon {
+    font-size: 26px;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .reminder-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 17px;
+    color: var(--terracotta);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .reminder-card p {
+    font-size: 14px;
+    color: var(--soft-ink);
+    line-height: 1.5;
+  }
+  .reminder-card.green   { border-left-color: var(--deep-green); }
+  .reminder-card.green h3   { color: var(--deep-green); }
+  .reminder-card.sunset  { border-left-color: var(--sunset); }
+  .reminder-card.sunset h3  { color: var(--sunset); }
+  .reminder-card.rose    { border-left-color: var(--rose); }
+  .reminder-card.rose h3    { color: var(--rose); }
+  .reminder-card.sky     { border-left-color: var(--sky); }
+  .reminder-card.sky h3     { color: var(--sky); }
+  .reminder-card.lavender { border-left-color: var(--lavender); }
+  .reminder-card.lavender h3 { color: var(--lavender); }
+
+  /* ============ DAILY ROUTINE — 3 columns morning/midday/evening ============ */
+  .daily-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .flow-card {
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 3px 12px var(--shadow);
+  }
+  .flow-card .head {
+    padding: 18px 22px 14px;
+    color: white;
+    font-family: 'Fraunces', serif;
+  }
+  .flow-card .head .time-icon {
+    font-size: 30px;
+    display: block;
+    margin-bottom: 4px;
+  }
+  .flow-card .head h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .flow-card .head .when {
+    font-size: 13px;
+    opacity: 0.92;
+    font-style: italic;
+    font-family: 'Inter', sans-serif;
+  }
+  .flow-card.morning .head { background: linear-gradient(135deg, var(--sunset), var(--honey)); }
+  .flow-card.midday  .head { background: linear-gradient(135deg, var(--deep-green), var(--sage)); }
+  .flow-card.evening .head { background: linear-gradient(135deg, var(--lavender), var(--sky)); }
+
+  .flow-card ul {
+    list-style: none;
+    padding: 18px 22px 22px;
+  }
+  .flow-card ul li {
+    padding: 8px 0 8px 26px;
+    font-size: 14.5px;
+    color: var(--ink);
+    border-bottom: 1px dashed rgba(107, 68, 35, 0.1);
+    position: relative;
+    line-height: 1.5;
+  }
+  .flow-card ul li:last-child { border-bottom: none; }
+  .flow-card ul li::before {
+    content: '✿';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    color: var(--terracotta-soft);
+    font-size: 14px;
+  }
+  .flow-card .gentle-note {
+    margin: 14px 22px 0;
+    padding: 12px 14px;
+    background: var(--cream);
+    border-radius: 12px;
+    font-size: 13px;
+    color: var(--soft-ink);
+    font-style: italic;
+    border-left: 3px solid var(--honey);
+  }
+  .flow-card .gentle-note strong {
+    color: var(--terracotta);
+    font-style: normal;
+  }
+
+  /* ============ LAUNDRY PLAN ============ */
+  .laundry-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+  }
+  .laundry-card {
+    background: white;
+    border-radius: 18px;
+    padding: 20px 22px;
+    box-shadow: 0 2px 8px var(--shadow);
+    border-top: 4px solid var(--lavender);
+  }
+  .laundry-card .day-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--cream);
+    color: var(--mud);
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+  }
+  .laundry-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    color: var(--mud);
+    margin-bottom: 12px;
+  }
+  .laundry-card ul {
+    list-style: none;
+  }
+  .laundry-card ul li {
+    padding: 5px 0 5px 18px;
+    font-size: 13.5px;
+    color: var(--soft-ink);
+    position: relative;
+  }
+  .laundry-card ul li::before {
+    content: '○';
+    position: absolute;
+    left: 0;
+    color: var(--lavender);
+    font-weight: 700;
+  }
+  .laundry-card.baby     { border-top-color: var(--rose); }
+  .laundry-card.baby ul li::before { color: var(--rose); }
+  .laundry-card.whites   { border-top-color: var(--sky); }
+  .laundry-card.whites ul li::before { color: var(--sky); }
+  .laundry-card.darks    { border-top-color: var(--mud); }
+  .laundry-card.darks ul li::before { color: var(--mud); }
+  .laundry-card.colors   { border-top-color: var(--sunset); }
+  .laundry-card.colors ul li::before { color: var(--sunset); }
+  .laundry-card.delicate { border-top-color: var(--terracotta-soft); }
+  .laundry-card.delicate ul li::before { color: var(--terracotta-soft); }
+  .laundry-card.linens   { border-top-color: var(--deep-green); }
+  .laundry-card.linens ul li::before { color: var(--deep-green); }
+  .laundry-card.own      { border-top-color: var(--honey); }
+  .laundry-card.own ul li::before { color: var(--honey); }
+  .laundry-card.rules    { background: var(--cream); border-top-color: var(--terracotta); }
+  .laundry-card.rules ul li::before { color: var(--terracotta); }
+
+  /* ============ BATHROOM PLAN ============ */
+  .bathroom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .bathroom-card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .bathroom-card.daily { background: linear-gradient(160deg, #E8F4F0, white); }
+  .bathroom-card.deep  { background: linear-gradient(160deg, #FFF0E0, white); }
+  .bathroom-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: var(--mud);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .bathroom-card ul li {
+    padding: 6px 0 6px 22px;
+    font-size: 14px;
+    color: var(--soft-ink);
+    position: relative;
+    list-style: none;
+    line-height: 1.5;
+  }
+  .bathroom-card ul li::before {
+    content: '◆';
+    position: absolute;
+    left: 0;
+    color: var(--terracotta-soft);
+    font-size: 11px;
+    top: 8px;
+  }
+  .bathroom-card ul li strong {
+    color: var(--terracotta);
+    font-weight: 600;
+  }
+
+  /* ============ WEEKLY SCHEDULE — 7 day cards (interactive) ============ */
+  .day-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+  .day-tab {
+    flex-shrink: 0;
+    padding: 12px 18px;
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--soft-ink);
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 4px var(--shadow);
+    min-width: 90px;
+    text-align: center;
+  }
+  .day-tab .small { display: block; font-size: 11px; font-weight: 400; color: var(--soft-ink); margin-top: 2px; font-family: 'Inter', sans-serif; }
+  .day-tab:hover { background: var(--cream); }
+  .day-tab.active {
+    background: var(--terracotta);
+    color: white;
+    border-color: var(--terracotta);
+    box-shadow: 0 4px 12px var(--shadow-strong);
+  }
+  .day-tab.active .small { color: rgba(255, 255, 255, 0.85); }
+
+  .day-panel {
+    display: none;
+    background: white;
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 3px 14px var(--shadow);
+    animation: fadeIn 0.3s ease;
+  }
+  .day-panel.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .day-panel .day-title {
+    font-family: 'Fraunces', serif;
+    font-size: 26px;
+    color: var(--mud);
+    margin-bottom: 4px;
+  }
+  .day-panel .day-focus {
+    font-size: 14px;
+    color: var(--terracotta);
+    font-style: italic;
+    margin-bottom: 22px;
+  }
+  .day-panel .day-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .day-panel .day-flow > div {
+    background: var(--cream);
+    padding: 16px 18px;
+    border-radius: 14px;
+  }
+  .day-panel .day-flow h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+    margin-bottom: 10px;
+    color: var(--mud);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .day-panel .day-flow h4 .ico { font-size: 18px; }
+  .day-panel .day-flow ul li {
+    list-style: none;
+    padding: 4px 0 4px 14px;
+    font-size: 13.5px;
+    color: var(--ink);
+    position: relative;
+    line-height: 1.5;
+  }
+  .day-panel .day-flow ul li::before {
+    content: '·';
+    position: absolute;
+    left: 4px;
+    color: var(--terracotta);
+    font-size: 18px;
+    line-height: 1;
+    top: 5px;
+  }
+
+  /* ============ MONTHLY DEEP CLEAN ============ */
+  .monthly-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .monthly-card {
+    background: white;
+    border-radius: 18px;
+    padding: 22px;
+    box-shadow: 0 2px 8px var(--shadow);
+    border-top: 4px solid var(--sunset);
+  }
+  .monthly-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    color: var(--terracotta);
+    margin-bottom: 12px;
+  }
+  .monthly-card ul li {
+    padding: 5px 0 5px 18px;
+    font-size: 13.5px;
+    color: var(--soft-ink);
+    list-style: none;
+    position: relative;
+    line-height: 1.5;
+  }
+  .monthly-card ul li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--sunset);
+    font-weight: 700;
+  }
+  .monthly-card.green { border-top-color: var(--deep-green); }
+  .monthly-card.green h3 { color: var(--deep-green); }
+  .monthly-card.green ul li::before { color: var(--deep-green); }
+  .monthly-card.lav { border-top-color: var(--lavender); }
+  .monthly-card.lav h3 { color: var(--lavender); }
+  .monthly-card.lav ul li::before { color: var(--lavender); }
+  .monthly-card.rose { border-top-color: var(--rose); }
+  .monthly-card.rose h3 { color: var(--rose); }
+  .monthly-card.rose ul li::before { color: var(--rose); }
+
+  /* ============ INVENTORY ============ */
+  .inventory {
+    background: linear-gradient(135deg, var(--deep-green), var(--sage));
+    color: white;
+    border-radius: 22px;
+    padding: 28px;
+    box-shadow: 0 4px 14px var(--shadow-strong);
+  }
+  .inventory h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .inventory .sub {
+    font-size: 14px;
+    opacity: 0.9;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+  .inv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+  .inv-grid label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 10px;
+    transition: background 0.2s;
+  }
+  .inv-grid label:hover { background: rgba(255, 255, 255, 0.22); }
+  .inv-grid input { width: 16px; height: 16px; cursor: pointer; accent-color: var(--honey); }
+
+  /* ============ COOKING + BABY NOTES ============ */
+  .notes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .note-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  .note-card.cook { border-left: 5px solid var(--sunset); }
+  .note-card.baby { border-left: 5px solid var(--rose); }
+  .note-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    color: var(--mud);
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .note-card ul li {
+    padding: 6px 0 6px 18px;
+    font-size: 14px;
+    color: var(--soft-ink);
+    list-style: none;
+    position: relative;
+    line-height: 1.55;
+  }
+  .note-card ul li::before {
+    content: '·';
+    position: absolute;
+    left: 0;
+    color: var(--terracotta);
+    font-size: 22px;
+    line-height: 1;
+    top: 4px;
+  }
+
+  /* ============ CLICKABLE TASKS / ACCORDION ============ */
+  /* Make eligible <li> items clickable */
+  li.has-detail {
+    cursor: pointer;
+    transition: background 0.15s ease, padding-left 0.15s ease;
+    border-radius: 6px;
+  }
+  li.has-detail:hover {
+    background: rgba(244, 201, 93, 0.18);
+  }
+  li.has-detail::after {
+    content: '＋';
+    margin-left: 8px;
+    color: var(--terracotta-soft);
+    font-weight: 700;
+    font-size: 13px;
+    transition: transform 0.2s ease;
+    display: inline-block;
+  }
+  li.has-detail.open::after {
+    content: '−';
+    color: var(--terracotta);
+  }
+
+  /* The detail card that appears under a clicked task */
+  .task-detail {
+    margin: 10px 0 12px;
+    background: linear-gradient(180deg, var(--cream), var(--paper));
+    border: 1px solid rgba(200, 85, 61, 0.15);
+    border-left: 4px solid var(--terracotta);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.6;
+    box-shadow: 0 2px 6px var(--shadow);
+    animation: slideDown 0.25s ease;
+  }
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .task-detail h5 {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    color: var(--terracotta);
+    margin-bottom: 10px;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+  .task-detail .label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    color: var(--mud);
+    font-weight: 700;
+    margin: 12px 0 6px;
+  }
+  .task-detail ol {
+    margin: 0 0 4px 20px;
+    padding: 0;
+  }
+  .task-detail ol li {
+    padding: 4px 0;
+    list-style: decimal;
+    color: var(--ink);
+    cursor: default;
+    font-size: 13.5px;
+  }
+  .task-detail ol li::before { content: none !important; }
+  .task-detail ol li::after { content: none !important; }
+  .task-detail ol li:hover { background: transparent; }
+  .task-detail .tips {
+    background: rgba(244, 201, 93, 0.22);
+    padding: 10px 14px;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+  .task-detail .tips ul {
+    margin: 0;
+    padding-left: 18px;
+    list-style: disc;
+  }
+  .task-detail .tips ul li {
+    padding: 3px 0;
+    color: var(--soft-ink);
+    cursor: default;
+    list-style: disc;
+    font-size: 13px;
+  }
+  .task-detail .tips ul li::before { content: none !important; }
+  .task-detail .tips ul li::after { content: none !important; }
+  .task-detail .tips ul li:hover { background: transparent; }
+  .task-detail .video-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 8px 14px;
+    background: var(--terracotta);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 0.2s;
+  }
+  .task-detail .video-link:hover { background: var(--mud); }
+  .task-detail .video-link::before {
+    content: '▶';
+    font-size: 11px;
+  }
+  .task-detail .ask-note {
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(157, 184, 175, 0.18);
+    border-radius: 8px;
+    font-size: 12.5px;
+    color: var(--soft-ink);
+    font-style: italic;
+    border-left: 3px solid var(--sage);
+  }
+  .task-detail .ask-note strong {
+    color: var(--deep-green);
+    font-style: normal;
+  }
+
+  /* Hint banner above clickable sections */
+  .tap-hint {
+    margin: 10px 0 18px;
+    padding: 10px 16px;
+    background: rgba(244, 201, 93, 0.25);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--mud);
+    text-align: center;
+    font-style: italic;
+  }
+  .tap-hint::before {
+    content: '👆 ';
+    margin-right: 4px;
+  }
+
+  /* ============ FOOTER ============ */
+  .footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 2px dashed var(--terracotta-soft);
+    color: var(--soft-ink);
+    font-size: 13px;
+  }
+  .footer .heart {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--terracotta);
+    margin-bottom: 6px;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 700px) {
+    .bathroom-grid { grid-template-columns: 1fr; }
+    .notes-grid { grid-template-columns: 1fr; }
+    .page { padding: 20px 14px 60px; }
+  }
+
+  /* ============ PRINT STYLES ============ */
+  @media print {
+    body { background: white; }
+    .page { max-width: 100%; padding: 0; }
+    .day-tabs { display: none; }
+    .day-panel {
+      display: block !important;
+      page-break-inside: avoid;
+      box-shadow: none;
+      border: 1px solid #ddd;
+      margin-bottom: 16px;
+    }
+    .reminder-card, .flow-card, .laundry-card, .bathroom-card, .monthly-card, .note-card {
+      box-shadow: none;
+      border: 1px solid #ddd;
+      page-break-inside: avoid;
+    }
+    .inventory { background: var(--cream); color: var(--ink); }
+    .inv-grid label { background: white; }
+    .section-head { page-break-after: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="greeting">Webale · Welcome · Karibu</div>
+    <h1>Sophia's Weekly <em>Home Guide</em></h1>
+    <p class="subtitle">A gentle rhythm for our home — written with care, for Sophia. Tap any day to see what it holds.</p>
+    <span class="version-tag">Version 6 · 2026</span>
+  </header>
+
+  <!-- GENTLE REMINDERS -->
+  <section>
+    <div class="section-head">
+      <span class="num">01</span>
+      <h2>Gentle Reminders</h2>
+      <span class="hint">a few things to keep in mind each day</span>
+    </div>
+
+    <div class="reminders">
+      <div class="reminder-card">
+        <span class="icon">🌅</span>
+        <h3>Morning is busy</h3>
+        <p>The family leaves at 9:30 AM. Please try to finish all morning tasks before then so we can all start the day calmly.</p>
+      </div>
+      <div class="reminder-card green">
+        <span class="icon">🛋️</span>
+        <h3>Living room mornings</h3>
+        <p>Sir usually relaxes in the living room in the morning — please give him space and skip cleaning that area until he leaves.</p>
+      </div>
+      <div class="reminder-card sunset">
+        <span class="icon">🌙</span>
+        <h3>Living room evenings</h3>
+        <p>When Sir is home in the evening, please leave the living room as it is — no need to enter or tidy.</p>
+      </div>
+      <div class="reminder-card rose">
+        <span class="icon">🛏️</span>
+        <h3>Bedroom timing</h3>
+        <p>Please clean the bedroom and private bathroom only when the family is home (weekdays), or after they wake on weekends (~11 AM).</p>
+      </div>
+      <div class="reminder-card sky">
+        <span class="icon">🍲</span>
+        <h3>Dinner is special</h3>
+        <p>Dinner is ready at 8:00 PM — please start prep around 6:00 PM so everything is fresh and warm.</p>
+      </div>
+      <div class="reminder-card lavender">
+        <span class="icon">🧸</span>
+        <h3>Baby Azzam's playtime</h3>
+        <p>When Azzam comes home around 5:00 PM, it is his playtime — please leave the toys where they are. He'll enjoy them more.</p>
+      </div>
+      <div class="reminder-card">
+        <span class="icon">🥗</span>
+        <h3>About lunch</h3>
+        <p>No need to cook lunch for the family — they eat at work. Madam's lunchbox is simply leftovers from the night before.</p>
+      </div>
+      <div class="reminder-card green">
+        <span class="icon">🌿</span>
+        <h3>Your evening rest</h3>
+        <p>After evening cleanup, please feel free to rest in the kitchen or your room. You've worked hard — enjoy your quiet time.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- DAILY ROUTINE -->
+  <section>
+    <div class="section-head">
+      <span class="num">02</span>
+      <h2>Every Day · A Gentle Rhythm</h2>
+      <span class="hint">the shape of an ordinary day</span>
+    </div>
+
+    <div class="tap-hint">Tap any task to see step-by-step instructions and tips</div>
+
+    <div class="daily-flow">
+      <!-- Morning -->
+      <div class="flow-card morning">
+        <div class="head">
+          <span class="time-icon">🌅</span>
+          <h3>Morning</h3>
+          <p class="when">before 9:30 AM</p>
+        </div>
+        <ul>
+          <li>Wake gently — be ready by 7:00 AM</li>
+          <li class="has-detail" data-task="prepare-breakfast">Prepare and serve breakfast for Madam and Sir</li>
+          <li class="has-detail" data-task="baby-breakfast">Make Baby Azzam's breakfast (soft, safe food)</li>
+          <li class="has-detail" data-task="pack-baby-bag">Pack Azzam's bag: clothes, diapers, wipes, snacks, water</li>
+          <li class="has-detail" data-task="wash-breast-pump">Wash the breast pump parts and place them in Madam's bag</li>
+          <li class="has-detail" data-task="pack-lunch-box">Pack Madam's lunchbox with last night's leftovers</li>
+          <li class="has-detail" data-task="check-fridge">Check the fridge — gently remove anything expired</li>
+          <li class="has-detail" data-task="wash-breakfast-dishes">Wash breakfast dishes and wipe the kitchen counter and stove</li>
+        </ul>
+        <div class="gentle-note"><strong>A note:</strong> please leave the living room to Sir in the morning.</div>
+      </div>
+
+      <!-- Midday -->
+      <div class="flow-card midday">
+        <div class="head">
+          <span class="time-icon">☀️</span>
+          <h3>Midday</h3>
+          <p class="when">9:30 AM — 5:00 PM</p>
+        </div>
+        <ul>
+          <li class="has-detail" data-task="bathroom-daily-wipe">Quick wipe of all bathrooms</li>
+          <li>The day's main cleaning task (see weekly plan)</li>
+          <li>Laundry on the day it's scheduled (see laundry plan)</li>
+          <li class="has-detail" data-task="handwash-baby-clothes">Hand-wash Azzam's clothes every two days, air dry only</li>
+          <li class="has-detail" data-task="mop-floors">Mop the kitchen and hallway floors</li>
+          <li>Take your own lunch from the leftovers</li>
+          <li class="has-detail" data-task="tidy-play-area">Tidy Azzam's play area in the middle of the day</li>
+          <li class="has-detail" data-task="start-dinner-prep">Begin dinner prep by 6:00 PM</li>
+        </ul>
+        <div class="gentle-note"><strong>Take your time:</strong> do one thing well before the next.</div>
+      </div>
+
+      <!-- Evening -->
+      <div class="flow-card evening">
+        <div class="head">
+          <span class="time-icon">🌙</span>
+          <h3>Evening</h3>
+          <p class="when">5:00 PM onwards</p>
+        </div>
+        <ul>
+          <li>Around 5 PM Azzam comes home — let his toys stay out</li>
+          <li>Dinner prep at 6:00 PM, served at 8:00 PM</li>
+          <li>Help or prepare dinner as Madam asks</li>
+          <li class="has-detail" data-task="wipe-dining-table">Wipe the dining table and chairs after the meal</li>
+          <li class="has-detail" data-task="wash-dinner-dishes">Wash dinner dishes, wipe stove and counters</li>
+          <li>Mop the kitchen floor</li>
+          <li class="has-detail" data-task="empty-trash">Empty kitchen and dining trash bins</li>
+          <li>Quick wipe of your own bathroom</li>
+        </ul>
+        <div class="gentle-note"><strong>After cleanup:</strong> the kitchen or your room is yours — please rest.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEKLY SCHEDULE TABS -->
+  <section>
+    <div class="section-head">
+      <span class="num">03</span>
+      <h2>Your Week · Day by Day</h2>
+      <span class="hint">tap any day to see its tasks</span>
+    </div>
+
+    <div class="tap-hint">Choose a day, then tap any task inside for details and tips</div>
+
+    <div class="day-tabs" id="dayTabs">
+      <button class="day-tab active" data-day="sun"><span>Sunday</span><span class="small">deep kitchen</span></button>
+      <button class="day-tab" data-day="mon"><span>Monday</span><span class="small">living room</span></button>
+      <button class="day-tab" data-day="tue"><span>Tuesday</span><span class="small">bathrooms</span></button>
+      <button class="day-tab" data-day="wed"><span>Wednesday</span><span class="small">whites laundry</span></button>
+      <button class="day-tab" data-day="thu"><span>Thursday</span><span class="small">darks + shopping</span></button>
+      <button class="day-tab" data-day="fri"><span>Friday</span><span class="small">linens + outdoor</span></button>
+      <button class="day-tab" data-day="sat"><span>Saturday</span><span class="small">house reset</span></button>
+    </div>
+
+    <!-- SUN -->
+    <div class="day-panel active" data-day="sun">
+      <h3 class="day-title">Sunday</h3>
+      <p class="day-focus">Deep Kitchen Care · Hand-wash Azzam's clothes</p>
+      <div class="day-flow">
+        <div>
+          <h4><span class="ico">🌅</span>Morning</h4>
+          <ul>
+            <li class="has-detail" data-task="prepare-breakfast">Breakfast and Madam's lunchbox</li>
+            <li class="has-detail" data-task="baby-breakfast">Azzam's breakfast and bag</li>
+            <li class="has-detail" data-task="wash-breast-pump">Wash breast pump and pack in Madam's bag</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">☀️</span>Midday</h4>
+          <ul>
+            <li class="has-detail" data-task="bathroom-daily-wipe">Quick wipe of all bathrooms</li>
+            <li>Your bathroom — full deep clean (Sunday's turn)</li>
+            <li class="has-detail" data-task="handwash-baby-clothes">Hand-wash Azzam's clothes, air dry</li>
+            <li class="has-detail" data-task="clean-microwave">Clean microwave inside and out</li>
+            <li class="has-detail" data-task="degrease-oven-hood">Degrease oven hood and filter</li>
+            <li class="has-detail" data-task="clean-inside-oven">Clean inside the oven</li>
+            <li class="has-detail" data-task="wipe-cabinets">Wipe all cabinet fronts</li>
+            <li class="has-detail" data-task="disinfect-bin">Disinfect the kitchen bin inside and out</li>
+            <li class="has-detail" data-task="wipe-fridge-exterior">Wipe fridge exterior, handles, and kitchen switches</li>
+            <li>Look in the pantry — note what is running low</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">🌙</span>Evening</h4>
+          <ul>
+            <li>Dinner ready at 8:00 PM</li>
+            <li>Wipe table, wash dishes, clean kitchen</li>
+            <li class="has-detail" data-task="empty-trash">Take out the trash</li>
+            <li>~5 PM Azzam home — please leave toys be</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- MON -->
+    <div class="day-panel" data-day="mon">
+      <h3 class="day-title">Monday</h3>
+      <p class="day-focus">Living Room Deep Clean</p>
+      <div class="day-flow">
+        <div>
+          <h4><span class="ico">🌅</span>Morning</h4>
+          <ul>
+            <li class="has-detail" data-task="prepare-breakfast">Breakfast and Madam's lunchbox</li>
+            <li class="has-detail" data-task="baby-breakfast">Azzam's breakfast and bag</li>
+            <li class="has-detail" data-task="wash-breast-pump">Wash breast pump and pack in Madam's bag</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">☀️</span>Midday</h4>
+          <ul>
+            <li class="has-detail" data-task="bathroom-daily-wipe">Quick wipe of all bathrooms</li>
+            <li class="has-detail" data-task="dust-living-room">Dust all living room surfaces: shelves, TV unit, décor</li>
+            <li class="has-detail" data-task="wipe-remote-switches">Wipe TV remote, light switches, door handles</li>
+            <li class="has-detail" data-task="vacuum-living-room">Vacuum or mop the living room floor</li>
+            <li class="has-detail" data-task="mop-floors">Mop kitchen and hallway</li>
+            <li class="has-detail" data-task="tidy-play-area">Tidy Azzam's play area</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">🌙</span>Evening</h4>
+          <ul>
+            <li>Dinner ready at 8:00 PM</li>
+            <li>Wipe table, wash dishes, clean kitchen</li>
+            <li class="has-detail" data-task="empty-trash">Take out the trash</li>
+            <li>~5 PM Azzam home — please leave toys be</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- TUE -->
+    <div class="day-panel" data-day="tue">
+      <h3 class="day-title">Tuesday</h3>
+      <p class="day-focus">Bathrooms · Hallway · Hand-wash Azzam's clothes</p>
+      <div class="day-flow">
+        <div>
+          <h4><span class="ico">🌅</span>Morning</h4>
+          <ul>
+            <li class="has-detail" data-task="prepare-breakfast">Breakfast and Madam's lunchbox</li>
+            <li class="has-detail" data-task="baby-breakfast">Azzam's breakfast and bag</li>
+            <li class="has-detail" data-task="wash-breast-pump">Wash breast pump and pack in Madam's bag</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">☀️</span>Midday</h4>
+          <ul>
+            <li class="has-detail" data-task="bathroom-daily-wipe">Quick wipe of all bathrooms</li>
+            <li>Your bathroom — full deep clean (Tuesday's turn)</li>
+            <li class="has-detail" data-task="handwash-baby-clothes">Hand-wash Azzam's clothes, air dry</li>
+            <li class="has-detail" data-task="mop-floors">Mop the kitchen hallway floor</li>
+            <li>Wipe hallway walls and light switches</li>
+            <li>Check cleaning supplies — note what is low</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">🌙</span>Evening</h4>
+          <ul>
+            <li>Dinner ready at 8:00 PM</li>
+            <li>Wipe table, wash dishes, clean kitchen</li>
+            <li class="has-detail" data-task="empty-trash">Take out the trash</li>
+            <li>~5 PM Azzam home — please leave toys be</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- WED -->
+    <div class="day-panel" data-day="wed">
+      <h3 class="day-title">Wednesday</h3>
+      <p class="day-focus">Whites Laundry · Baby Items · Storage Bath</p>
+      <div class="day-flow">
+        <div>
+          <h4><span class="ico">🌅</span>Morning</h4>
+          <ul>
+            <li class="has-detail" data-task="prepare-breakfast">Breakfast and Madam's lunchbox</li>
+            <li class="has-detail" data-task="baby-breakfast">Azzam's breakfast and bag</li>
+            <li class="has-detail" data-task="wash-breast-pump">Wash breast pump and pack in Madam's bag</li>
+            <li>Sort whites — start the machine before 9:30</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">☀️</span>Midday</h4>
+          <ul>
+            <li class="has-detail" data-task="bathroom-daily-wipe">Quick wipe of all bathrooms</li>
+            <li>Storage bathroom — light clean and tidy</li>
+            <li class="has-detail" data-task="whites-laundry">Whites: dry → iron → fold → wardrobe</li>
+            <li class="has-detail" data-task="sanitize-baby-toys">Sanitize Azzam's toys with baby-safe cleaner</li>
+            <li class="has-detail" data-task="rotate-toys">Rotate Azzam's toys — store some, bring others out</li>
+            <li>Wipe Azzam's play mats and play furniture</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">🌙</span>Evening</h4>
+          <ul>
+            <li>Dinner ready at 8:00 PM</li>
+            <li>Wipe table, wash dishes, clean kitchen</li>
+            <li class="has-detail" data-task="empty-trash">Take out the trash</li>
+            <li>~5 PM Azzam home — please leave toys be</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- THU -->
+    <div class="day-panel" data-day="thu">
+      <h3 class="day-title">Thursday</h3>
+      <p class="day-focus">Darks Laundry · Shopping List · Hand-wash Azzam's clothes</p>
+      <div class="day-flow">
+        <div>
+          <h4><span class="ico">🌅</span>Morning</h4>
+          <ul>
+            <li class="has-detail" data-task="prepare-breakfast">Breakfast and Madam's lunchbox</li>
+            <li class="has-detail" data-task="baby-breakfast">Azzam's breakfast and bag</li>
+            <li class="has-detail" data-task="wash-breast-pump">Wash breast pump and pack in Madam's bag</li>
+            <li>Sort darks — start the machine before 9:30</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">☀️</span>Midday</h4>
+          <ul>
+            <li class="has-detail" data-task="bathroom-daily-wipe">Quick wipe of all bathrooms</li>
+            <li class="has-detail" data-task="darks-laundry">Darks: dry → iron → fold → wardrobe</li>
+            <li class="has-detail" data-task="handwash-baby-clothes">Hand-wash Azzam's clothes, air dry</li>
+            <li class="has-detail" data-task="shopping-list">Prepare the weekly shopping list</li>
+            <li>Check stock: groceries, cleaning, baby items</li>
+            <li class="has-detail" data-task="fridge-light-clean">Light fridge clean — wipe shelves, remove old food</li>
+            <li>Tidy entry corridor and camping storage</li>
+            <li>Wipe entry handles and corridor floor</li>
+            <li class="has-detail" data-task="water-plants">Water the plants (if any)</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">🌙</span>Evening</h4>
+          <ul>
+            <li>Dinner ready at 8:00 PM</li>
+            <li>Give the shopping list to Madam</li>
+            <li>Wipe table, wash dishes, clean kitchen, take out trash</li>
+            <li>~5 PM Azzam home — please leave toys be</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRI -->
+    <div class="day-panel" data-day="fri">
+      <h3 class="day-title">Friday</h3>
+      <p class="day-focus">Weekend · Linens and Outdoor (gentler pace)</p>
+      <div class="day-flow">
+        <div>
+          <h4><span class="ico">🌅</span>Morning</h4>
+          <ul>
+            <li>Breakfast for the family when they wake</li>
+            <li>Sort towels, linens, and colored home clothes — start the machine</li>
+            <li class="has-detail" data-task="bathroom-daily-wipe">Quick wipe of all bathrooms</li>
+            <li>Bedroom and private bathroom only after the family wakes (~11 AM)</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">☀️</span>Midday</h4>
+          <ul>
+            <li>Dry, iron, and fold towels and linens — put away</li>
+            <li>Light going-out clothes: hand-wash or lowest dryer setting</li>
+            <li>Sweep the yard, wipe outdoor table and chairs</li>
+            <li>Dust window sills and ledges throughout the house</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">🌙</span>Evening</h4>
+          <ul>
+            <li>Dinner ready at 8:00 PM</li>
+            <li>Wipe table, wash dishes, clean kitchen, take out trash</li>
+            <li>Weekend evening — a flexible, easier pace</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAT -->
+    <div class="day-panel" data-day="sat">
+      <h3 class="day-title">Saturday</h3>
+      <p class="day-focus">Weekend · House Reset · Private Bathroom · Hand-wash Azzam's clothes</p>
+      <div class="day-flow">
+        <div>
+          <h4><span class="ico">🌅</span>Morning</h4>
+          <ul>
+            <li>Breakfast for the family when they wake</li>
+            <li class="has-detail" data-task="bathroom-daily-wipe">Quick wipe of all bathrooms</li>
+            <li>Bedroom and private bathroom only after the family wakes (~11 AM)</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">☀️</span>Midday</h4>
+          <ul>
+            <li class="has-detail" data-task="clean-bedroom">Clean the bedroom, dust all surfaces</li>
+            <li>Private bathroom — full deep clean</li>
+            <li class="has-detail" data-task="handwash-baby-clothes">Hand-wash Azzam's clothes, air dry</li>
+            <li>Wash your own clothes</li>
+            <li class="has-detail" data-task="clean-windows-interior">Clean interior windows: living room and kitchen</li>
+            <li>Wipe all door handles and switches throughout the house</li>
+            <li>A full, calm walk through every room — tidy and in order</li>
+          </ul>
+        </div>
+        <div>
+          <h4><span class="ico">🌙</span>Evening</h4>
+          <ul>
+            <li>Dinner ready at 8:00 PM</li>
+            <li>Wipe table, wash dishes, clean kitchen, take out trash</li>
+            <li>Weekend evening — a flexible, easier pace</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAUNDRY PLAN -->
+  <section>
+    <div class="section-head">
+      <span class="num">04</span>
+      <h2>Laundry · A Plan for the Week</h2>
+      <span class="hint">each load has its own day</span>
+    </div>
+
+    <div class="laundry-grid">
+      <div class="laundry-card baby">
+        <span class="day-tag">every 2 days · by hand</span>
+        <h3>Baby Azzam's Clothes</h3>
+        <ul>
+          <li>Wash by hand only — please don't use the machine</li>
+          <li>Use the gentle baby-safe detergent only</li>
+          <li>Rinse thoroughly — no soap residue</li>
+          <li>Air dry only — never the dryer</li>
+          <li>Fold and arrange in Azzam's area</li>
+          <li><em>Suggested days: Sun, Tue, Thu, Sat</em></li>
+        </ul>
+      </div>
+
+      <div class="laundry-card whites">
+        <span class="day-tag">Wednesday</span>
+        <h3>Adults — Whites</h3>
+        <ul>
+          <li>Whites only — please don't mix with darks</li>
+          <li>Machine wash — warm cycle</li>
+          <li>Dry, iron, and fold neatly</li>
+          <li>Arrange in the wardrobe by type</li>
+        </ul>
+      </div>
+
+      <div class="laundry-card darks">
+        <span class="day-tag">Thursday</span>
+        <h3>Adults — Darks</h3>
+        <ul>
+          <li>Darks only — please keep apart from whites</li>
+          <li>Machine wash — cold cycle</li>
+          <li>Dry, iron, and fold neatly</li>
+          <li>Arrange in the wardrobe by type</li>
+        </ul>
+      </div>
+
+      <div class="laundry-card colors">
+        <span class="day-tag">Friday or as needed</span>
+        <h3>Colored Home Clothes</h3>
+        <ul>
+          <li>Home clothes (not white or black) — may be washed together</li>
+          <li>No strict separation needed for these</li>
+          <li>Machine wash — cold or warm cycle</li>
+          <li>Fold and put away neatly</li>
+        </ul>
+      </div>
+
+      <div class="laundry-card delicate">
+        <span class="day-tag">as needed</span>
+        <h3>Light Going-Out Clothes</h3>
+        <ul>
+          <li>If only a few pieces, please wash by hand</li>
+          <li>If using the dryer: lowest, lightest setting only</li>
+          <li>Handle gently — these are delicate</li>
+          <li>Hang or fold carefully after drying</li>
+          <li><em>Always check the label first</em></li>
+        </ul>
+      </div>
+
+      <div class="laundry-card linens">
+        <span class="day-tag">Friday</span>
+        <h3>Towels &amp; Bed Linens</h3>
+        <ul>
+          <li>Machine wash — regular cycle</li>
+          <li>Dry fully before folding</li>
+          <li>Iron and fold the linens neatly</li>
+          <li>Store in their proper place</li>
+        </ul>
+      </div>
+
+      <div class="laundry-card own">
+        <span class="day-tag">Saturday or as needed</span>
+        <h3>Sophia's Own Clothes</h3>
+        <ul>
+          <li>You wash your own clothes separately</li>
+          <li>Please keep apart from family laundry</li>
+          <li>Use weekend time for this</li>
+        </ul>
+      </div>
+
+      <div class="laundry-card rules">
+        <span class="day-tag">always</span>
+        <h3>Gentle Rules</h3>
+        <ul>
+          <li>Whites and darks stay apart</li>
+          <li>Iron and fold before placing in the wardrobe</li>
+          <li>Please don't leave wet clothes in the machine</li>
+          <li>Start the machine early in the morning when you can</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BATHROOM PLAN -->
+  <section>
+    <div class="section-head">
+      <span class="num">05</span>
+      <h2>Bathrooms · A Simple Care Plan</h2>
+      <span class="hint">a quick daily touch + a deeper weekly turn</span>
+    </div>
+
+    <div class="bathroom-grid">
+      <div class="bathroom-card daily">
+        <h3>🚿 Every Day · All Bathrooms</h3>
+        <ul>
+          <li>Wipe sink and tap — gently remove water marks</li>
+          <li>Wipe toilet seat and the outside of the bowl</li>
+          <li>Quick rinse of the floor if needed</li>
+          <li>Hang towels neatly</li>
+          <li>A small spray of freshener if there is any smell</li>
+        </ul>
+      </div>
+      <div class="bathroom-card deep">
+        <h3>✨ Weekly Deep Turn</h3>
+        <ul>
+          <li><strong>Sunday:</strong> Your own bathroom — full scrub (tiles, toilet inside, sink, mirror, floor)</li>
+          <li><strong>Tuesday:</strong> Your own bathroom — full scrub again (a midweek reset)</li>
+          <li><strong>Wednesday:</strong> Storage bathroom — light clean and tidy</li>
+          <li><strong>Saturday:</strong> Private bathroom — full clean after the family wakes (~11 AM)</li>
+          <li><em>Weekdays: please enter the private bathroom only when the family is home</em></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- MONTHLY DEEP CLEAN -->
+  <section>
+    <div class="section-head">
+      <span class="num">06</span>
+      <h2>Monthly · Deep Care</h2>
+      <span class="hint">once a month, a slower, deeper round</span>
+    </div>
+
+    <div class="monthly-grid">
+      <div class="monthly-card">
+        <h3>🍳 Kitchen Deep Clean</h3>
+        <ul>
+          <li class="has-detail" data-task="fridge-deep-clean">Full fridge clean — empty, wipe every shelf and drawer</li>
+          <li>Clean inside all kitchen cabinets</li>
+          <li>Degrease the oven fully — racks included</li>
+          <li class="has-detail" data-task="descale-kettle">Descale kettle and coffee maker</li>
+          <li>Clean behind fridge and under all appliances</li>
+          <li>Wash the bin with disinfectant inside and outside</li>
+        </ul>
+      </div>
+      <div class="monthly-card green">
+        <h3>🪟 Surfaces &amp; Windows</h3>
+        <ul>
+          <li>Clean all exterior windows with glass cleaner</li>
+          <li>Wipe all skirting boards and baseboards</li>
+          <li>Clean A/C vents and ceiling fans</li>
+          <li>Wipe walls in high-traffic areas</li>
+          <li>Wash curtains or wipe blinds</li>
+        </ul>
+      </div>
+      <div class="monthly-card rose">
+        <h3>🛁 Deep Bathroom Scrub</h3>
+        <ul>
+          <li>Scrub all tiles and grout in every bathroom</li>
+          <li>Descale showerhead and taps</li>
+          <li>Clean behind toilet and under sink</li>
+          <li>Wash bathroom mats and rugs</li>
+          <li>Sanitize all bathroom accessories and holders</li>
+        </ul>
+      </div>
+      <div class="monthly-card lav">
+        <h3>📦 Storage &amp; Toys</h3>
+        <ul>
+          <li>Sort and reorganize camping/entry storage</li>
+          <li>Rotate seasonal items in the storage bathroom</li>
+          <li>Full toy audit — clean, sort, store unused toys</li>
+          <li>Check the pantry — discard expired items</li>
+          <li>Wipe all storage shelves</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVENTORY -->
+  <section>
+    <div class="section-head">
+      <span class="num">07</span>
+      <h2>Weekly Inventory</h2>
+      <span class="hint">tap each box on Thursday to check stock</span>
+    </div>
+
+    <div class="inventory">
+      <h3>🛒 Every Thursday</h3>
+      <p class="sub">Please tick what you have, leave empty what we need.</p>
+      <div class="inv-grid">
+        <label><input type="checkbox"> Dish soap</label>
+        <label><input type="checkbox"> Adult laundry detergent</label>
+        <label><input type="checkbox"> Baby-safe detergent (hand wash)</label>
+        <label><input type="checkbox"> Floor cleaner</label>
+        <label><input type="checkbox"> Bathroom disinfectant</label>
+        <label><input type="checkbox"> Trash bags (all sizes)</label>
+        <label><input type="checkbox"> Paper towels / cloths</label>
+        <label><input type="checkbox"> Glass cleaner</label>
+        <label><input type="checkbox"> Baby-safe toy cleaner</label>
+        <label><input type="checkbox"> Sponges and scrubbers</label>
+        <label><input type="checkbox"> Azzam's snacks</label>
+        <label><input type="checkbox"> Fruits and vegetables</label>
+      </div>
+    </div>
+  </section>
+
+  <!-- COOKING + BABY -->
+  <section>
+    <div class="section-head">
+      <span class="num">08</span>
+      <h2>Cooking &amp; Baby Care</h2>
+      <span class="hint">small notes that help every day</span>
+    </div>
+
+    <div class="notes-grid">
+      <div class="note-card cook">
+        <h3>🍲 Cooking Notes</h3>
+        <ul>
+          <li>Madam decides the meals — no need to plan independently</li>
+          <li>You may suggest ideas based on what's in the fridge</li>
+          <li>Feel free to repeat meals you've already learned</li>
+          <li>Breakfast: ready by 7:30 AM</li>
+          <li>No family lunch to cook — they eat at work</li>
+          <li>Madam's lunchbox: pack from last night's dinner each morning</li>
+          <li>Dinner: ready at 8:00 PM — start prep at 6:00 PM</li>
+          <li>Baby Azzam (6 months): a small portion of soft family food, or a simple baby meal</li>
+          <li>Azzam is breastfed — no formula needed</li>
+        </ul>
+      </div>
+      <div class="note-card baby">
+        <h3>👶 Baby Azzam · Daily Care</h3>
+        <ul>
+          <li>Every morning: wash the breast pump parts thoroughly</li>
+          <li>Place clean pump parts in Madam's bag</li>
+          <li class="has-detail" data-task="pack-baby-bag">Pack Azzam's bag: clothes, diapers, wipes, snacks, water</li>
+          <li>Prepare an age-appropriate meal or small portion of family food</li>
+          <li>Hand-wash Azzam's clothes every two days with baby-safe detergent</li>
+          <li>Air dry only — please never use the dryer for his clothes</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="heart">Thank you, Sophia — your care makes our home a home.</p>
+    <p>Sophia's Weekly Home Guide · Version 6 · Print and keep in the kitchen</p>
+  </footer>
+
+</div>
+
+<script>
+  // ============ TASK DETAILS DATA ============
+// Task details — written in simple, friendly English for Sophia
+// Each task has: steps, tips, and an optional video URL
+
+const taskDetails = {
+  // ============ MORNING TASKS ============
+  "prepare-breakfast": {
+    title: "Preparing Breakfast for Madam and Sir",
+    steps: [
+      "Wash your hands well with soap and warm water",
+      "Set the table for two: plates, cups, spoons, knives, napkins",
+      "Boil water for tea or coffee — ask Madam what she prefers today",
+      "Prepare what Madam asked you to make (eggs, toast, fruit, etc.)",
+      "Pour fresh juice or water in a glass",
+      "Place everything neatly on the table before Madam and Sir come"
+    ],
+    tips: [
+      "Try to have everything ready by 7:30 AM",
+      "Keep the kitchen quiet — they may still be sleeping nearby",
+      "If you don't know what to cook, ask Madam the night before"
+    ],
+    video: "https://www.youtube.com/results?search_query=simple+breakfast+ideas+for+adults"
+  },
+
+  "baby-breakfast": {
+    title: "Preparing Baby Azzam's Breakfast",
+    steps: [
+      "Wash your hands very well — baby food must be very clean",
+      "Use only soft, safe foods: mashed banana, soft oatmeal, mashed avocado, soft eggs",
+      "Make sure the food is warm — not hot — test with your wrist",
+      "Cut all pieces very small to prevent choking",
+      "Use Azzam's own clean bowl and small spoon",
+      "Sit with him while he eats — never leave him alone with food"
+    ],
+    tips: [
+      "Azzam is 6 months old — only soft foods, no nuts, no honey, no salt",
+      "If you're not sure about a food, ask Madam first",
+      "Never give him hard fruits, popcorn, or whole grapes"
+    ],
+    video: "https://www.youtube.com/results?search_query=6+month+old+baby+breakfast+ideas"
+  },
+
+  "pack-baby-bag": {
+    title: "Packing Baby Azzam's Bag",
+    steps: [
+      "Take Azzam's clean bag from his room",
+      "Pack 2 changes of clothes (in case of spills)",
+      "Pack at least 6 clean diapers",
+      "Pack a full pack of baby wipes",
+      "Pack 1-2 small snacks (only what Madam approves)",
+      "Pack a clean water bottle filled with fresh water",
+      "Pack a small clean towel and a bib"
+    ],
+    tips: [
+      "Check the bag every morning — Madam may have used items the day before",
+      "If something is running low (diapers, wipes), tell Madam right away",
+      "Make sure the bag is closed properly before placing it ready"
+    ]
+  },
+
+  "wash-breast-pump": {
+    title: "Washing the Breast Pump",
+    steps: [
+      "Take all parts apart carefully — bottle, valves, membranes, flange",
+      "Rinse all parts with cold water first to remove milk",
+      "Wash each part with warm soapy water using a clean sponge (only for pump parts)",
+      "Pay extra attention to the small valves and membranes — they are delicate",
+      "Rinse all parts very well — no soap should remain",
+      "Place parts on a clean towel to air dry, OR use a clean cloth to dry them",
+      "Once dry, place all clean parts in a clean bag inside Madam's bag"
+    ],
+    tips: [
+      "This is very important — Azzam drinks from these parts",
+      "Use a separate sponge ONLY for the pump (not the dish sponge)",
+      "If anything looks broken, tell Madam right away",
+      "Never use hot water on plastic parts — it damages them"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+clean+breast+pump+parts"
+  },
+
+  "pack-lunch-box": {
+    title: "Packing Madam's Lunch Box",
+    steps: [
+      "Take Madam's clean lunch box from the kitchen",
+      "Open the fridge and find last night's dinner leftovers",
+      "Heat the food briefly if needed — but pack it warm, not hot",
+      "Place a good portion in the lunch box (not too much, not too little)",
+      "Add a small spoon or fork inside",
+      "Close the lunch box tightly so it doesn't leak",
+      "Place it in Madam's bag before 9:30 AM"
+    ],
+    tips: [
+      "Always use leftovers from the night before — never make new food",
+      "Make sure the lunch box is clean before packing",
+      "If there are no leftovers, tell Madam immediately"
+    ]
+  },
+
+  "check-fridge": {
+    title: "Checking the Fridge for Expired Food",
+    steps: [
+      "Open the fridge and look at each shelf carefully",
+      "Check the date on milk, yogurt, cheese, juice, sauces",
+      "Smell food that has no date — if it smells bad, throw it out",
+      "Check fruits and vegetables — remove any that are soft, brown, or moldy",
+      "Take out anything expired and throw it in the kitchen bin",
+      "Wipe the shelf where the bad food was placed",
+      "Tell Madam if something important is finished"
+    ],
+    tips: [
+      "When in doubt, throw it out — bad food makes people sick",
+      "If you're not sure if something is expired, leave it and ask Madam",
+      "Do this gently every morning"
+    ]
+  },
+
+  "wash-breakfast-dishes": {
+    title: "Washing Breakfast Dishes",
+    steps: [
+      "Scrape any food into the trash bin",
+      "Rinse dishes with warm water first",
+      "Fill the sink with warm soapy water (or use running water)",
+      "Wash glasses first (cleanest), then plates, then pots last",
+      "Rinse each dish with clean water — no soap should remain",
+      "Place dishes on the rack to dry, or dry with a clean towel",
+      "Wipe the counter and stove top with a clean cloth"
+    ],
+    tips: [
+      "Don't leave wet dishes in the sink",
+      "Change the dish towel every 2-3 days",
+      "Make sure the stove is cool before wiping"
+    ]
+  },
+
+  // ============ MIDDAY TASKS ============
+  "bathroom-daily-wipe": {
+    title: "Daily Bathroom Wipe (All Bathrooms)",
+    steps: [
+      "Get a clean cloth and bathroom spray cleaner",
+      "Spray and wipe the sink — remove all water marks",
+      "Spray and wipe the tap until it shines",
+      "Wipe the toilet seat (top and bottom)",
+      "Wipe the outside of the toilet bowl",
+      "If the floor has water or marks, rinse quickly",
+      "Hang towels straight and neat",
+      "If there's any smell, spray a little air freshener"
+    ],
+    tips: [
+      "This is a quick clean — about 5 minutes per bathroom",
+      "Use a different cloth for the toilet vs the sink",
+      "Wash your hands well after every bathroom"
+    ]
+  },
+
+  "mop-floors": {
+    title: "Mopping Kitchen and Hallway Floors",
+    steps: [
+      "Sweep the floor first to remove dust and crumbs",
+      "Fill a bucket with warm water and floor cleaner (small amount)",
+      "Dip the mop and squeeze well — not too wet",
+      "Mop in straight lines, starting from the far corner",
+      "Move toward the door so you don't walk on wet floor",
+      "Rinse the mop in clean water if it gets dirty",
+      "Let the floor dry — don't walk on it for 10 minutes"
+    ],
+    tips: [
+      "Too much water damages the floor — squeeze the mop well",
+      "Change the water if it becomes very dirty",
+      "Hang the mop to dry after — don't leave it wet in the bucket"
+    ]
+  },
+
+  "tidy-play-area": {
+    title: "Tidying Baby Azzam's Play Area (Midday Only)",
+    steps: [
+      "Pick up toys gently — check for any that are broken",
+      "Wipe toys lightly with a baby-safe cloth",
+      "Place toys back in their basket or shelf neatly",
+      "Fold the play mat or smooth it out",
+      "Pick up any food crumbs or small papers",
+      "Sweep the area gently"
+    ],
+    tips: [
+      "Only do this MIDDAY — never after Azzam comes home (5 PM)",
+      "When Azzam is home, his toys must stay where he wants them",
+      "Throw away any broken toys but tell Madam first"
+    ]
+  },
+
+  "start-dinner-prep": {
+    title: "Starting Dinner Preparation (6:00 PM)",
+    steps: [
+      "Wash your hands well",
+      "Read what Madam said for tonight's dinner",
+      "Take out all ingredients from the fridge and pantry",
+      "Wash all vegetables in cold water",
+      "Cut, chop, and prepare ingredients neatly",
+      "Start cooking so it's ready by 8:00 PM",
+      "Keep the kitchen clean as you cook"
+    ],
+    tips: [
+      "Always ask Madam if you're unsure about a recipe",
+      "Taste the food gently as you cook",
+      "Time everything so the dinner is hot when ready, not cold"
+    ]
+  },
+
+  // ============ EVENING TASKS ============
+  "wipe-dining-table": {
+    title: "Wiping the Dining Table and Chairs",
+    steps: [
+      "Wait until everyone has finished eating and left the table",
+      "Take all plates, cups, and food off the table",
+      "Get a clean damp cloth with a little soap",
+      "Wipe the entire table top in circular motions",
+      "Wipe each chair seat",
+      "Wipe the chair backs and legs if needed",
+      "Dry the table with a dry cloth so it's not wet"
+    ],
+    tips: [
+      "Wipe up spills right away to prevent stains",
+      "Don't use too much water — it can damage wood",
+      "Push the chairs in neatly when done"
+    ]
+  },
+
+  "wash-dinner-dishes": {
+    title: "Washing Dinner Dishes",
+    steps: [
+      "Scrape leftover food into the bin (or save in containers for Madam's lunch)",
+      "Rinse all dishes with warm water",
+      "Fill the sink with warm soapy water",
+      "Wash glasses first, then plates, then bowls, then pots last",
+      "For dirty pots, soak them in soapy water for 10 minutes first",
+      "Rinse everything with clean water",
+      "Place on the drying rack or dry with a clean towel",
+      "Wipe the stove and counters when done"
+    ],
+    tips: [
+      "Save good leftovers in containers for Madam's lunch tomorrow",
+      "Don't go to bed with dirty dishes in the sink",
+      "Use hot water for greasy dishes"
+    ]
+  },
+
+  "empty-trash": {
+    title: "Taking Out the Trash",
+    steps: [
+      "Tie the trash bag closed tightly",
+      "Carry it carefully to the outside bin",
+      "Put a fresh new bag in the trash bin inside",
+      "Wipe the inside of the bin if it's dirty",
+      "Wash your hands well after"
+    ],
+    tips: [
+      "Empty trash every evening — don't leave it overnight",
+      "If the bag is heavy, double-bag it so it doesn't break",
+      "Tell Madam when trash bags are running low"
+    ]
+  },
+
+  // ============ SUNDAY TASKS ============
+  "clean-microwave": {
+    title: "Cleaning the Microwave (Inside and Out)",
+    steps: [
+      "Place a bowl of water with a slice of lemon inside the microwave",
+      "Run the microwave for 3 minutes — the steam loosens the dirt",
+      "Carefully remove the bowl (it's hot!)",
+      "Take out the glass plate inside and wash it with soap",
+      "Wipe the inside walls with a damp cloth — dirt comes off easily",
+      "Wipe the door (inside and outside)",
+      "Dry everything with a clean cloth before putting the plate back"
+    ],
+    tips: [
+      "The lemon trick makes cleaning very easy",
+      "Never use harsh chemicals inside the microwave",
+      "Be careful — the bowl will be very hot after 3 minutes"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+clean+microwave+with+lemon+water"
+  },
+
+  "degrease-oven-hood": {
+    title: "Degreasing the Oven Hood and Filter",
+    steps: [
+      "Turn off the oven hood completely",
+      "Remove the metal filter (it slides or clips out)",
+      "Soak the filter in hot water with dish soap for 15-20 minutes",
+      "Scrub the filter gently with a brush — grease comes off",
+      "Spray degreaser on the hood surface",
+      "Wipe with a damp cloth — repeat if needed",
+      "Rinse and dry the filter completely before putting it back"
+    ],
+    tips: [
+      "Wear gloves — degreaser can hurt your hands",
+      "If the filter is very greasy, leave it soaking longer",
+      "Ask Madam if you're not sure how to remove the filter"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+clean+greasy+kitchen+hood+filter"
+  },
+
+  "clean-inside-oven": {
+    title: "Cleaning Inside the Oven",
+    steps: [
+      "Make sure the oven is completely cool (not hot at all)",
+      "Remove the racks and trays — wash them with soap in the sink",
+      "Spray oven cleaner inside (follow the bottle instructions)",
+      "Wait the time written on the bottle (usually 15-30 minutes)",
+      "Wipe the inside with a damp cloth — dirt comes off",
+      "Repeat if there are still tough spots",
+      "Wipe with clean water to remove all chemical residue",
+      "Dry the racks and put them back"
+    ],
+    tips: [
+      "ALWAYS open the kitchen window — oven cleaner has strong fumes",
+      "Wear gloves to protect your hands",
+      "Never spray cleaner on heating elements (the metal bars)"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+clean+inside+oven+easy"
+  },
+
+  "wipe-cabinets": {
+    title: "Wiping All Cabinet Fronts",
+    steps: [
+      "Mix warm water with a little dish soap in a bowl",
+      "Dip a soft cloth and squeeze well — not too wet",
+      "Wipe each cabinet door from top to bottom",
+      "Pay attention to the handles — they get dirty quickly",
+      "Wipe with a clean dry cloth to remove water marks",
+      "Don't forget the cabinets above the stove — they get greasy"
+    ],
+    tips: [
+      "Don't use harsh cleaners on wood cabinets — they damage the finish",
+      "Always wipe in the direction of the wood grain",
+      "If grease is heavy, use a tiny bit of degreaser"
+    ]
+  },
+
+  "disinfect-bin": {
+    title: "Disinfecting the Kitchen Bin",
+    steps: [
+      "Take out the trash bag and throw it away",
+      "Take the bin outside or to a wash area",
+      "Rinse with hot water",
+      "Spray bin cleaner or disinfectant inside and outside",
+      "Scrub with a brush — pay attention to corners",
+      "Rinse very well with clean water",
+      "Let it dry completely in the sun if possible",
+      "Put a fresh new bag inside before using again"
+    ],
+    tips: [
+      "Wear gloves — bins are very dirty",
+      "Do this once a week to keep the kitchen smelling fresh",
+      "Use a separate brush only for the bin"
+    ]
+  },
+
+  "wipe-fridge-exterior": {
+    title: "Wiping Fridge Exterior, Handles, and Switches",
+    steps: [
+      "Mix warm water with mild soap in a bowl",
+      "Wipe the front of the fridge from top to bottom",
+      "Wipe the sides if you can reach them",
+      "Pay extra attention to the handles — they are touched often",
+      "Wipe each light switch in the kitchen",
+      "Dry with a clean towel — no water streaks",
+      "Don't forget the top of the fridge — it collects dust"
+    ],
+    tips: [
+      "Stainless steel needs special care — wipe in one direction only",
+      "For fingerprints, a tiny bit of vinegar helps",
+      "Don't get water near electric switches"
+    ]
+  },
+
+  // ============ MONDAY (LIVING ROOM) ============
+  "dust-living-room": {
+    title: "Dusting Living Room Surfaces",
+    steps: [
+      "Get a soft microfiber cloth and dusting spray",
+      "Start from the highest shelves and work down",
+      "Wipe shelves, picture frames, decorations, lamp bases",
+      "Lift each item, dust under it, then put it back exactly where it was",
+      "Dust the TV stand and around the TV",
+      "Wipe the TV screen with a special cloth (very gently)",
+      "Dust any side tables or coffee tables"
+    ],
+    tips: [
+      "Always dust BEFORE you vacuum — dust falls down",
+      "Don't move décor items to new places — keep them where Madam put them",
+      "Use a dry cloth on electronics, never wet"
+    ]
+  },
+
+  "wipe-remote-switches": {
+    title: "Wiping TV Remote, Switches, and Door Handles",
+    steps: [
+      "Take a soft cloth slightly damp with disinfectant spray",
+      "Wipe the TV remote — front, back, and between buttons",
+      "Wipe each light switch in the room",
+      "Wipe each door handle (both sides of the door)",
+      "Dry everything with a clean cloth",
+      "These are touched many times daily — important to keep clean"
+    ],
+    tips: [
+      "Don't spray cleaner directly on the remote — spray on the cloth",
+      "Be gentle with electronics",
+      "Use a Q-tip for tight spaces if needed"
+    ]
+  },
+
+  "vacuum-living-room": {
+    title: "Vacuuming or Mopping the Living Room",
+    steps: [
+      "Move small items off the floor (toys, shoes, papers)",
+      "Lift cushions and vacuum the sofa as well",
+      "Vacuum in straight lines, covering every part",
+      "Pay attention to corners and under furniture",
+      "If the floor is tile or wood, mop after vacuuming",
+      "Replace cushions and items neatly"
+    ],
+    tips: [
+      "Empty the vacuum bag/container when full",
+      "Move slowly — going fast doesn't pick up dirt",
+      "Don't vacuum in the morning when Sir is in the living room"
+    ]
+  },
+
+  // ============ WEDNESDAY (BABY STUFF) ============
+  "sanitize-baby-toys": {
+    title: "Sanitizing Baby Azzam's Toys",
+    steps: [
+      "Gather all the toys he uses",
+      "Sort them: plastic toys, soft toys, electronic toys",
+      "Plastic toys: wash in warm water with baby-safe soap, rinse well, dry",
+      "Soft toys: wipe with baby-safe spray, or wash in machine if label allows",
+      "Electronic toys: wipe with a slightly damp cloth — never soak",
+      "Let everything dry completely before giving back to Azzam"
+    ],
+    tips: [
+      "ONLY use baby-safe cleaner — regular cleaner can hurt Azzam",
+      "If a toy is broken or has small loose parts, tell Madam",
+      "Do this when Azzam is not home so toys can dry in peace"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+sanitize+baby+toys+safely"
+  },
+
+  "rotate-toys": {
+    title: "Rotating Baby Azzam's Toys",
+    steps: [
+      "Look at the toys he has out — choose 3-4 to put away",
+      "Bring out 3-4 different toys from storage",
+      "Clean the new toys before giving them to Azzam",
+      "Store the old toys in their proper place",
+      "Arrange the new toys nicely in his play area"
+    ],
+    tips: [
+      "Rotating toys keeps Azzam interested — same toys become boring",
+      "Don't rotate his favorite toy — keep it always",
+      "Ask Madam if you're not sure which toys can be put away"
+    ]
+  },
+
+  // ============ LAUNDRY TASKS ============
+  "handwash-baby-clothes": {
+    title: "Hand-Washing Baby Azzam's Clothes",
+    steps: [
+      "Fill a clean basin with cool or lukewarm water",
+      "Add a small amount of baby-safe gentle detergent",
+      "Place Azzam's clothes in the water",
+      "Gently squeeze and rub — DO NOT scrub hard",
+      "Pay attention to stains: rub gently with extra detergent",
+      "Empty the soapy water",
+      "Rinse with clean water until NO soap remains (check carefully!)",
+      "Squeeze gently — never twist baby clothes",
+      "Hang on a line or rack in shade — air dry only"
+    ],
+    tips: [
+      "Soap residue can hurt Azzam's skin — rinse very, very well",
+      "NEVER use the dryer for his clothes — air dry only",
+      "Use only the special baby detergent Madam provided",
+      "Wash every 2 days so they don't pile up"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+hand+wash+baby+clothes"
+  },
+
+  "whites-laundry": {
+    title: "Washing Adult Whites Laundry (Wednesday)",
+    steps: [
+      "Gather all white clothes — shirts, underwear, socks, white sheets",
+      "Check pockets — remove anything inside",
+      "Separate any white clothes with stains and treat stains first",
+      "Put whites in the machine — DO NOT mix with any colored or dark items",
+      "Add white-safe detergent (the regular bottle for adults)",
+      "Set machine to WARM water cycle",
+      "Start the machine before 9:30 AM if possible",
+      "When done, transfer to dryer or hang up",
+      "Iron and fold neatly, then put in wardrobe by type"
+    ],
+    tips: [
+      "ONE colored sock can ruin all the whites — check carefully",
+      "Hot water can shrink some clothes — warm is safest",
+      "Iron while clothes are still slightly damp for best results"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+wash+white+clothes+properly"
+  },
+
+  "darks-laundry": {
+    title: "Washing Adult Darks Laundry (Thursday)",
+    steps: [
+      "Gather all dark clothes — black, navy, dark gray, brown",
+      "Check pockets — remove anything inside",
+      "Turn dark clothes inside-out to protect the color",
+      "Put in the machine — DO NOT mix with whites or light colors",
+      "Add detergent",
+      "Set machine to COLD water cycle (cold protects dark color)",
+      "Start before 9:30 AM if possible",
+      "When done, dry, iron, and fold neatly",
+      "Put in wardrobe organized by type"
+    ],
+    tips: [
+      "Cold water keeps darks black — hot water makes them fade",
+      "Turning inside-out protects color and printed designs",
+      "Wash darks separately every time"
+    ]
+  },
+
+  "iron-clothes": {
+    title: "Ironing Clothes",
+    steps: [
+      "Set up the ironing board in a safe place",
+      "Fill the iron with water (for steam)",
+      "Set the temperature based on the fabric label",
+      "Start with cool fabrics (silk, polyester), then warmer ones (cotton)",
+      "Iron in smooth straight motions — don't leave iron in one spot",
+      "Iron the back of clothes first, then the front",
+      "Hang ironed clothes immediately on hangers"
+    ],
+    tips: [
+      "Always check the label first — wrong heat burns clothes",
+      "Never leave the iron on while doing something else",
+      "Empty the water from the iron when done"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+iron+clothes+properly"
+  },
+
+  // ============ BATHROOM DEEP CLEAN ============
+  "bathroom-full-scrub": {
+    title: "Full Bathroom Deep Scrub",
+    steps: [
+      "Open the bathroom window for fresh air",
+      "Spray cleaner on tiles, sink, toilet, and tub — let it sit 5 minutes",
+      "Start with the highest area: tiles and walls",
+      "Scrub tiles with a brush — grout lines too",
+      "Clean the mirror with glass cleaner",
+      "Scrub the sink — inside and the tap",
+      "Clean the toilet: inside the bowl with toilet brush + cleaner",
+      "Wipe the toilet seat, lid, and outside with disinfectant",
+      "Scrub the floor last — work from far corner toward the door",
+      "Rinse everything well with clean water",
+      "Dry surfaces with a clean towel",
+      "Put fresh towels and refill any soap"
+    ],
+    tips: [
+      "Wear gloves — bathroom cleaners are strong",
+      "Open the window — fumes can be harmful",
+      "Use different cloths for the toilet vs sink (never the same)"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+deep+clean+a+bathroom"
+  },
+
+  // ============ KITCHEN DEEP CLEAN (MONTHLY) ============
+  "fridge-deep-clean": {
+    title: "Full Fridge Deep Clean",
+    steps: [
+      "Take out ALL items — place them on the counter or in a cool box",
+      "Throw away anything expired",
+      "Remove all shelves and drawers",
+      "Wash shelves with warm soapy water in the sink",
+      "Dry shelves completely before putting back",
+      "Wipe inside walls with warm water + a little vinegar (kills bad smells)",
+      "Wipe the door seals with a soft cloth",
+      "Put shelves back",
+      "Return food, organized neatly: sauces, vegetables, dairy, drinks separated",
+      "Wipe the outside of items before putting them back"
+    ],
+    tips: [
+      "Do this once a month — it keeps food fresh and safe",
+      "Vinegar removes smells — never use bleach inside fridge",
+      "Try to do this when Madam is home in case you have questions"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+deep+clean+a+refrigerator"
+  },
+
+  "descale-kettle": {
+    title: "Descaling the Kettle and Coffee Maker",
+    steps: [
+      "Empty the kettle",
+      "Fill halfway with white vinegar + halfway with water",
+      "Let it boil",
+      "Let it sit for 20 minutes after boiling",
+      "Empty the vinegar water",
+      "Rinse 2-3 times with clean water (the vinegar smell goes away)",
+      "Boil clean water once and empty before using normally",
+      "For coffee maker: run a vinegar+water cycle, then 2 plain water cycles"
+    ],
+    tips: [
+      "White scales inside the kettle slow down boiling — vinegar removes them",
+      "Never use lemon for very dirty kettles — vinegar works better",
+      "Do this once a month"
+    ]
+  },
+
+  // ============ MISC ============
+  "water-plants": {
+    title: "Watering the Plants",
+    steps: [
+      "Check each plant — touch the soil with your finger",
+      "If soil feels dry, water gently",
+      "If soil feels wet, skip that plant today",
+      "Pour water slowly at the base of the plant — not on the leaves",
+      "Water until you see a tiny bit come out the bottom",
+      "Empty the saucer if water collects there",
+      "Remove any yellow or dead leaves"
+    ],
+    tips: [
+      "Too much water kills plants — only water when dry",
+      "Morning is best for watering",
+      "If a plant looks sick, tell Madam"
+    ]
+  },
+
+  "shopping-list": {
+    title: "Preparing the Weekly Shopping List",
+    steps: [
+      "Open the fridge and check what is finished or low",
+      "Check the pantry: rice, pasta, oil, sugar, salt, spices",
+      "Check cleaning supplies: dish soap, laundry detergent, floor cleaner",
+      "Check baby items: diapers, wipes, baby-safe detergent, snacks",
+      "Write a clean, organized list — group similar items together",
+      "Give the list to Madam in the evening with dinner"
+    ],
+    tips: [
+      "Be honest about quantities — don't list more than needed",
+      "Note brand names if Madam prefers specific brands",
+      "Write neatly so Madam can read easily"
+    ]
+  },
+
+  "fridge-light-clean": {
+    title: "Light Fridge Cleaning",
+    steps: [
+      "Take a quick look at what's expired and remove it",
+      "Wipe the most-used shelves with a damp cloth",
+      "Clean any spills you find",
+      "Wipe the inside of the door",
+      "Don't take everything out — this is a quick clean only"
+    ],
+    tips: [
+      "This is a quick clean — full deep clean is monthly",
+      "Always check for spills they may have spread",
+      "Tell Madam about expired food before throwing out"
+    ]
+  },
+
+  // ============ SATURDAY ============
+  "clean-bedroom": {
+    title: "Cleaning the Bedroom",
+    steps: [
+      "Wait until the family is awake (~11 AM on weekends)",
+      "Open the windows for fresh air",
+      "Make the bed neatly — fresh sheets if it's the day",
+      "Pick up any clothes — fold or put in laundry",
+      "Dust all surfaces: dressers, bedside tables, lamps",
+      "Wipe mirrors with glass cleaner",
+      "Vacuum or sweep the floor",
+      "Mop if the floor is hard",
+      "Empty the bedroom bin"
+    ],
+    tips: [
+      "Be respectful of personal items — don't move them around",
+      "Only enter when family is awake — never when they're sleeping",
+      "Ask before opening drawers or closets"
+    ]
+  },
+
+  "clean-windows-interior": {
+    title: "Cleaning Interior Windows",
+    steps: [
+      "Get glass cleaner and a microfiber cloth (or newspaper works great)",
+      "Spray cleaner on the glass — not too much",
+      "Wipe in straight lines, top to bottom",
+      "Use a dry cloth to remove streaks",
+      "Don't forget the window frames — wipe them too",
+      "Clean the windowsill where dust collects"
+    ],
+    tips: [
+      "Cleaning on a cloudy day is better — sun makes streaks dry too fast",
+      "Newspaper is amazing for streak-free glass",
+      "Don't use too much cleaner — less is more"
+    ],
+    video: "https://www.youtube.com/results?search_query=how+to+clean+windows+streak+free"
+  }
+};
+
+
+  // ============ ACCORDION: Click any task to see details ============
+  document.querySelectorAll('li.has-detail').forEach(li => {
+    li.addEventListener('click', (e) => {
+      // Don't open if user clicked inside an already-open detail card
+      if (e.target.closest('.task-detail')) return;
+      e.stopPropagation();
+
+      const taskId = li.dataset.task;
+      const data = taskDetails[taskId];
+      if (!data) return;
+
+      // If already open, close it
+      const existing = li.querySelector(':scope > .task-detail');
+      if (existing) {
+        existing.remove();
+        li.classList.remove('open');
+        return;
+      }
+
+      // Build detail card
+      const card = document.createElement('div');
+      card.className = 'task-detail';
+
+      let html = `<h5>${data.title}</h5>`;
+
+      if (data.steps && data.steps.length) {
+        html += `<span class="label">How to do it</span><ol>`;
+        data.steps.forEach(s => html += `<li>${s}</li>`);
+        html += `</ol>`;
+      }
+
+      if (data.tips && data.tips.length) {
+        html += `<div class="tips"><span class="label">Helpful tips</span><ul>`;
+        data.tips.forEach(t => html += `<li>${t}</li>`);
+        html += `</ul></div>`;
+      }
+
+      if (data.video) {
+        html += `<a href="${data.video}" target="_blank" rel="noopener" class="video-link">Watch a video tutorial</a>`;
+      }
+
+      html += `<div class="ask-note"><strong>Not sure?</strong> If something is unclear or you need help, please ask Madam — she is happy to show you.</div>`;
+
+      card.innerHTML = html;
+      li.appendChild(card);
+      li.classList.add('open');
+    });
+  });
+
+  // ============ Day tab switcher ============
+  const tabs = document.querySelectorAll('.day-tab');
+  const panels = document.querySelectorAll('.day-panel');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const day = tab.dataset.day;
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.querySelector(`.day-panel[data-day="${day}"]`).classList.add('active');
+      // Close any open detail cards when switching days
+      document.querySelectorAll('.task-detail').forEach(c => c.remove());
+      document.querySelectorAll('li.has-detail.open').forEach(l => l.classList.remove('open'));
+    });
+  });
+
+  // Auto-select today's day on load
+  const today = new Date().getDay();
+  const dayMap = ['sun','mon','tue','wed','thu','fri','sat'];
+  const todayKey = dayMap[today];
+  if (todayKey) {
+    tabs.forEach(t => t.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    const todayTab = document.querySelector(`.day-tab[data-day="${todayKey}"]`);
+    const todayPanel = document.querySelector(`.day-panel[data-day="${todayKey}"]`);
+    if (todayTab && todayPanel) {
+      todayTab.classList.add('active');
+      todayPanel.classList.add('active');
+    }
+  }
+</script>
+</body>
+</html>
